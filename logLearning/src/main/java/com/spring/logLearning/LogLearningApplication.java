@@ -1,7 +1,6 @@
 package com.spring.logLearning;
 
 import Service.LogService;
-import Service.MyService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -15,8 +14,8 @@ public class LogLearningApplication {
 		ApplicationContext applicationContext =  SpringApplication.run(LogLearningApplication.class, args);
 		System.out.println("Hello World");
 
-		MyService myService = applicationContext.getBean(MyService.class);
-		myService.performAction();
+		//MyService myService = applicationContext.getBean(MyService.class);
+		//myService.performAction();
 
 		LogService logService = applicationContext.getBean(LogService.class);
 		logService.performLogAction();
