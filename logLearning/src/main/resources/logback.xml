@@ -1,9 +1,26 @@
-<configuration>
-    <!-- Configure a specific package to use DEBUG level -->
-    <logger name="Service" level="DEBUG" />
+<!--<configuration>-->
+<!--    &lt;!&ndash; Configure a specific package to use DEBUG level &ndash;&gt;-->
+<!--    <logger name="Service" level="DEBUG" />-->
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+<!--    <appender name="FILE" class="ch.qos.logback.core.FileAppender">-->
+<!--        <file>myapp.log</file>-->
+<!--        <encoder>-->
+<!--            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+<!--    <root level="INFO">-->
+<!--        <appender-ref ref="FILE" />-->
+<!--    </root>-->
+<!--</configuration>-->
+
+
+<configuration>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>myapp.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>myapp.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
