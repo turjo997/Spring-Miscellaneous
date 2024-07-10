@@ -1,0 +1,6 @@
+spring:
+  data:
+    mysql:
+      database: Book
+      host: mysql
+      port: 3306
