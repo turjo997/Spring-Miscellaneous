@@ -1,21 +1,27 @@
 package com.spring.docker_mysql;
 
-import model.Book;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import com.spring.docker_mysql.model.Book;
+import com.spring.docker_mysql.repository.BookRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import org.springframework.web.bind.annotation.*;
-import repository.BookRepository;
 
 import java.util.List;
+
 
 @SpringBootApplication
 @RestController
 @RequestMapping("/book")
 public class DockerMysqlApplication {
 
-	@Autowired
-	private BookRepository repository;
+
+	private final BookRepository repository;
+
+	DockerMysqlApplication(BookRepository bookRepository){
+		this.repository = bookRepository;
+	}
 
 	@PostMapping
 	public Book saveBook(@RequestBody Book book){

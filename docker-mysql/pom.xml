@@ -80,7 +80,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>springboot-mysql-docker</finalName>
+		<finalName>crud-app</finalName>
 	</build>
 
 </project>
