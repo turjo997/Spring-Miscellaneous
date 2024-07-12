@@ -1,0 +1,14 @@
+#version: '3.7'
+#services:
+#  mysqlContainer:
+#    image: mysql:latest
+#    container_name: "mysqlContainer"
+#    ports:
+#      - 3307:3306
+#  crud-app:
+#    image: crud-app:latest
+#    container_name: crud-app
+#    ports:
+#      - 9090:8080
+#    links:
+#      - mysqlContainer
