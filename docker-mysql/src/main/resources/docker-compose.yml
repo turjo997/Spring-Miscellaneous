@@ -1,3 +1,42 @@
+version: '3.7'
+services:
+  mysqlContainer:
+    image: mysql:latest
+    container_name: "mysqlContainer"
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: BookDB
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  crud-app:
+    image: crud-app:latest
+    container_name: crud-app
+    ports:
+      - 9090:8080
+    depends_on:
+      mysqlContainer:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: mysqlContainer
+      MYSQL_PORT: 3306
+      MYSQL_DB_NAME: BookDB
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+
+volumes:
+  mysql-data:
+
+
+
+
 #version: '3.7'
 #services:
 #  mysqlContainer:
@@ -5,10 +44,26 @@
 #    container_name: "mysqlContainer"
 #    ports:
 #      - 3307:3306
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: BookDB
+#    healthcheck:
+#      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#
 #  crud-app:
 #    image: crud-app:latest
 #    container_name: crud-app
 #    ports:
 #      - 9090:8080
-#    links:
-#      - mysqlContainer
+#    depends_on:
+#      mysqlContainer:
+#        condition: service_healthy
+#    environment:
+#      MYSQL_HOST: mysqlContainer
+#      MYSQL_PORT: 3306
+#      MYSQL_DB_NAME: BookDB
+#      MYSQL_USER: root
+#      MYSQL_PASSWORD: root
