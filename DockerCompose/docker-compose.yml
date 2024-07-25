@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  DBContainer:
+    image: mysql:latest
+    container_name: "DBContainer"
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: BookDB
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  crud-app:
+    image: ullash997/crud-app:0.1
+    container_name: crud-image
+    ports:
+      - 8090:8080
+    depends_on:
+      DBContainer:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: DBContainer
+      MYSQL_PORT: 3306
+      MYSQL_DB_NAME: BookDB
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+
+volumes:
+  mysql-data:
