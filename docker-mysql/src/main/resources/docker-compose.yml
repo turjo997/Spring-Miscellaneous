@@ -2,7 +2,7 @@ version: '3.7'
 services:
   mysqlContainer:
     image: mysql:latest
-    container_name: "mysqlContainer"
+    container_name: "mysqlContainerDB"
     ports:
       - 3307:3306
     environment:

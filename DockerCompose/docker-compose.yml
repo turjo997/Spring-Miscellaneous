@@ -2,9 +2,9 @@ version: '3.7'
 services:
   DBContainer:
     image: mysql:latest
-    container_name: "DBContainer"
+    container_name: "DBContainerBook"
     ports:
-      - 3307:3306
+      - 3308:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: BookDB
@@ -15,7 +15,7 @@ services:
       retries: 5
     volumes:
       - mysql-data:/var/lib/mysql
-
+      - ./BookDB.sql:/docker-entrypoint-initdb.d/BookDB.sql
   crud-app:
     image: ullash997/crud-app:0.1
     container_name: crud-image
@@ -33,3 +33,6 @@ services:
 
 volumes:
   mysql-data:
+    external:
+      name: resources_mysql-data
+
