@@ -1,0 +1,28 @@
+docker run -p 3307:3306 --name mysqlDBContainer -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=BookDB -d mysql
+docker run -p 8090:8080 --name crudimage --net networkmysql -e MYSQL_HOST=mysqlContainer -e MYSQL_PORT:3306 -e MYSQL_DB_NAME=BookDB -e MYSQL_USER=root -e MYSQL_PASSWORD=root crudimage
+docker network create networkmysql
+docker network connect networkmysql mySqlContainer
+docker build -t crudimage .
+docker run -p 8060:8080 --name crudimage --net networkmysql -e MYSQL_HOST=mysqlContainer -e MYSQL_PORT:3306 -e MYSQL_DB_NAME=BookDB -e MYSQL_USER=root -e MYSQL_PASSWORD=root ullash997/crud-app
+docker tag crud-app ullash997/crud-app:latest
+docker push ullash997/crud-app:latest
+
+
+
+
+docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_USER=admin -e POSTGRES_DB=farmingHubDB -v C:\postgres_container_data:/var/lib/postgresql/data --name=postgres_con postgres
+
+
+docker run -d -p 8090:9090 --name=farming2 ullash997/farming-hub:0.0.1  
+
+
+docker exec -t mysqlContainer mysqldump -u root -proot BookDB > backup.sql
+
+
+on shell
+
+docker exec -it postgres_con bash
+
+psql -U admin -d farmingHubDB
+
+\l
