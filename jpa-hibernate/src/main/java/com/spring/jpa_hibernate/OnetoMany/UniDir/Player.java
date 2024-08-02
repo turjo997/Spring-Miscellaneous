@@ -8,14 +8,14 @@ import jakarta.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class User {
+public class Player {
 
     @Id
     @GeneratedValue
-    private Integer userId;
-    private String userName;
-    private String userPwd;
+    private Integer playerId;
+    private String playerName;
+    private String playerPwd;
 
     @OneToMany
-    private List<UserRole> userRoles;
+    private List<PlayerRole> playerRoles;
 }
