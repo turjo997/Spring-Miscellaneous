@@ -1,11 +1,11 @@
-package com.spring.Jbdc_Security_Postgres.controller;
+package com.spring.Jdbc_Security.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-
     @GetMapping("/home")
     public String getHomePage(){
         return "homepage";
@@ -16,11 +16,14 @@ public class HomeController {
         return "welcomePage";
     }
 
+
+//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin")
     public String getAdminPage() {
         return "adminPage";
     }
 
+//    @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("/employee")
     public String getEmployeePage() {
         return "empPage";
