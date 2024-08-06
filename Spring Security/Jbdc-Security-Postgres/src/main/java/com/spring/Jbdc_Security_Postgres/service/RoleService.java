@@ -1,4 +1,4 @@
-package com.spring.Jbdc_Security_Postgres.service.impl;
+package com.spring.Jbdc_Security_Postgres.service;
 
 import com.spring.Jbdc_Security_Postgres.entity.Role;
 import com.spring.Jbdc_Security_Postgres.entity.RoleEnum;

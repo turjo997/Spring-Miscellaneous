@@ -23,9 +23,17 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="user_id")
     private Long userId;
+
+    @Column(name="user_name")
     private String username;
+
+    @Column(name="user_passwd")
     private String password;
+
+    @Column(name="user_email")
+    private String email;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Role> roles;

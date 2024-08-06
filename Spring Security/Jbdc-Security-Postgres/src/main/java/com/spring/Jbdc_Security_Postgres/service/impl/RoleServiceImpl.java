@@ -1,9 +1,9 @@
-package com.spring.Jbdc_Security_Postgres.service.impl.impl;
+package com.spring.Jbdc_Security_Postgres.service.impl;
 
 import com.spring.Jbdc_Security_Postgres.entity.Role;
 import com.spring.Jbdc_Security_Postgres.entity.RoleEnum;
 import com.spring.Jbdc_Security_Postgres.repository.RoleRepository;
-import com.spring.Jbdc_Security_Postgres.service.impl.RoleService;
+import com.spring.Jbdc_Security_Postgres.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
