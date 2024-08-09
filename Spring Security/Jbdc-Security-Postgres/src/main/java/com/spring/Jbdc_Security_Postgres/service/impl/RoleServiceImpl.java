@@ -5,15 +5,16 @@ import com.spring.Jbdc_Security_Postgres.entity.RoleEnum;
 import com.spring.Jbdc_Security_Postgres.repository.RoleRepository;
 import com.spring.Jbdc_Security_Postgres.service.RoleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
-    private final RoleRepository roleRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
 
     @Override
