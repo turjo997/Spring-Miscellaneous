@@ -2,11 +2,14 @@ package com.spring.file_operations.service;
 
 import com.spring.file_operations.entity.Invoice;
 import com.spring.file_operations.repository.InvoiceRepository;
+import lombok.RequiredArgsConstructor;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,26 +18,26 @@ public class ExcelDataService {
 
     private final InvoiceRepository invoiceRepository;
 
-    Workbook workbook;
-
     @Value("${app.upload.file:${user.home}}")
     public String EXCEL_FILE_PATH;
-
 
     public ExcelDataService(InvoiceRepository invoiceRepository) {
         this.invoiceRepository = invoiceRepository;
     }
 
+
     public List<Invoice> getExcelDataAsList(){
-         List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
+        Workbook workbook = null;
 
          // Create a DataFormatter to format and get each cell's value as String
         DataFormatter dataFormatter = new DataFormatter();
 
+        System.out.println(EXCEL_FILE_PATH);
+
         // Create the Workbook
         try {
             workbook = WorkbookFactory.create(new File(EXCEL_FILE_PATH));
-
         }catch (EncryptedDocumentException | IOException e){
             e.printStackTrace();
         }
@@ -98,7 +101,21 @@ public class ExcelDataService {
 
 
     public int saveExcelData(List<Invoice> invoices) {
-        invoices = invoiceRepository.saveAll(invoices);
-        return invoices.size();
+
+        List<Invoice> list = new ArrayList<>();
+
+        for (Invoice invoice : invoices) {
+
+            Invoice inv = invoiceRepository.saveAllInvoices(
+                    invoice.getAmount(), invoice.getName() ,
+                    invoice.getNumber(),
+                    invoice.getReceivedDate());
+
+            list.add(inv);
+        }
+
+
+        //invoices = invoiceRepository.saveAllInvoices(invoices);
+        return list.size();
     }
 }
