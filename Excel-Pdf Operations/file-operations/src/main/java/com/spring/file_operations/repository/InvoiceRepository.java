@@ -12,9 +12,12 @@ public interface InvoiceRepository {
 
    // List<Invoice> saveAll(List<Invoice> invoices);
 
-
-    @Query(value = "INSERT INTO invoice (amount, name , number, received_date) VALUES (:amount, :name , :number, :receivedDate)", nativeQuery = true)
+    @Query(value = "INSERT INTO invoice (id, amount, name, number, received_date) VALUES (nextval('invoice_id_seq'), :amount, :name, :number, :receivedDate) RETURNING *", nativeQuery = true)
     Invoice saveAllInvoices(@Param("amount") Double amount, @Param("name") String name,
-                         @Param("number") String number,
-                         @Param("receivedDate") String receivedDate);
+                            @Param("number") String number,
+                            @Param("receivedDate") String receivedDate);
+
+
+    Invoice save(Invoice invoice);
+
 }

@@ -57,8 +57,10 @@ public class ExcelDataService {
 
         for (Row row : sheet){
             for (Cell cell : row){
-                String cellValue = dataFormatter.formatCellValue(cell);
-                list.add(cellValue);
+                String cellValue = dataFormatter.formatCellValue(cell).trim();
+                if (!cellValue.isEmpty()) {
+                    list.add(cellValue);
+                }
             }
         }
 
@@ -76,6 +78,10 @@ public class ExcelDataService {
     }
 
     private List<Invoice> createList(List<String> excelData, int noOfColumns) {
+
+        System.out.println(excelData);
+        System.out.println(excelData.size());
+        System.out.println(noOfColumns);
 
         ArrayList<Invoice> invList = new ArrayList<Invoice>();
 
@@ -110,6 +116,8 @@ public class ExcelDataService {
                     invoice.getAmount(), invoice.getName() ,
                     invoice.getNumber(),
                     invoice.getReceivedDate());
+
+            //Invoice inv = invoiceRepository.save(invoice); //i can use this onw also
 
             list.add(inv);
         }
