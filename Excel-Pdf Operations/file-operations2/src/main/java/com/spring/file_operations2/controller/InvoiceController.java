@@ -1,16 +1,25 @@
 package com.spring.file_operations2.controller;
 
 import com.spring.file_operations2.entity.Invoice;
+import com.spring.file_operations2.excelservice.ExcelService;
 import com.spring.file_operations2.excelservice.InvoiceDataExcelExport;
 import com.spring.file_operations2.exception.InvoiceNotFoundException;
 import com.spring.file_operations2.service.IInvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @Controller
@@ -19,6 +28,9 @@ public class InvoiceController {
 
     @Autowired
     private IInvoiceService invoiceService;
+
+    @Autowired
+    private ExcelService excelService;
 
     @GetMapping("/")
     public String showHomePage() {
@@ -103,5 +115,31 @@ public class InvoiceController {
         mav.addObject("list" , list);
         return mav;
     }
+
+
+
+
+    @GetMapping("/export")
+    public ResponseEntity<InputStreamResource> exportExcel() throws IOException {
+        ByteArrayInputStream stream = excelService.exportInvoice();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=invoices.xlsx");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(new InputStreamResource(stream));
+    }
+
+
+
+
+
+
+
+
+
+
 
 }
