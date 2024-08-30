@@ -28,4 +28,10 @@ psql -U admin -d farmingHubDB
 \l
 
 
-docker run -d --name pgadmin_container -p 5050:80 -e PGADMIN_DEFAULT_EMAIL=97.bhattacharjee.ullash@gmail.com -e PGADMIN_DEFAULT_PASSWORD=admin dpage/pgadmin4:latest
+docker run -d --name pgadmin_container -p 5050:80 -e PGADMIN_DEFAULT_EMAIL=97.bhattacharjee.ullash@gmail.com -e PGADMIN_DEFAULT_PASSWORD=admin dpage/pgadmin4:latest            
+
+docker run -d --name postgres_container -e POSTGRES_PASSWORD=admin -e POSTGRES_USER=admin -e POSTGRES_DB=invoice-mvc -p 5436:5432 -v D:\postgres_container_data:/var/lib/postgresql/data postgres:latest
+
+
+docker run -d --name fileapp-container -p 8050:8080 -e SPRING_DATASOURCE_URL=jdbc:postgresql:localhost:5436/invoice-mvc -e SPRING_DATASOURCE_USERNAME=admin -e SPRING_DATASOURCE_PASSWORD=admin fileapp:latest
+
