@@ -31,6 +31,15 @@ class MyClassB{
         }
 
     }
+
+    void validate3(int age) throws UserDefinedException {
+        if (age < 18){
+            throw new UserDefinedException("Not eligible to vote. So sorry !");
+        }else{
+            System.out.println("Eligible to vote");
+        }
+
+    }
 }
 
 public class TestThrow2 {
@@ -39,8 +48,13 @@ public class TestThrow2 {
         MyClassB ob = new MyClassB();
 
         //ob.validate(13);
-        ob.validate2(17);
+        //ob.validate2(17);
 
+        try{
+            ob.validate3(12);
+        }catch (UserDefinedException e){
+            System.out.println(e.getMessage());
+        }
         System.out.println("normal workflow");
     }
 }
