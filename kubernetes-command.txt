@@ -63,3 +63,7 @@ minikube delete
 
 kubectl apply -f k8s-deployment.yaml
 
+kubectl apply -f service.yaml
+
+minikube service springboot-k8s-svc
+
