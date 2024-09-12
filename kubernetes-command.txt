@@ -1,9 +1,20 @@
+#connect minikube with docker . Make sure your docker is running
 minikube start --driver=docker
 
 minikube status
 
+#Once starting the minikube , it will create single node cluster. To verify whether it created or not
+kubectl cluster-info
+
+#To read local docker repo
+minikube docker-env
+
+docker images
+
+#create the docker image
 docker build -t springboot-k8s-demo:1.0 .
 
+#deploy the docker image into kubernetes cluster
 kubectl create deployment spring-boot-k8s --image=springboot-k8s-demo:1.0 --port-8080
 
 kubectl get deployment
