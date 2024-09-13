@@ -69,3 +69,12 @@ kubectl apply -f service.yaml
 #create service object. with this service object we inform to the kubernetes, expose my application to outside kubernetes cluster so that user can able to #access it
 minikube service springboot-k8s-svc
 
+docker tag springboot-crud-k8s:1.0 ullash997/springboot-crud-k8s:1.0
+
+docker push ullash997/springboot-crud-k8s:1.0
+
+mvn clean install -DskipTests
+
+kubectl port-forward postgres-5c97cc44bf-jtgqx 5433:5432
+
+
