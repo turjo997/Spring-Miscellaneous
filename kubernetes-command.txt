@@ -61,9 +61,11 @@ kubectl get nodes
 
 minikube delete
 
+#created deployment object using yaml configuration where we tell to kubernetes to take docker image and run it in inside kubernetes pods
 kubectl apply -f k8s-deployment.yaml
 
 kubectl apply -f service.yaml
 
+#create service object. with this service object we inform to the kubernetes, expose my application to outside kubernetes cluster so that user can able to #access it
 minikube service springboot-k8s-svc
 
