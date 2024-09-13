@@ -1,12 +1,15 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/book-crud
-    username: postgres
-    password: root
+    url: jdbc:postgresql://${DB_HOST}:5432/${DB_NAME} #jdbc:postgresql://localhost:5432/book-crud
+    username: ${POSTGRES_USER} #postgres
+    password: ${POSTGRES_PASSWORD} #root
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     hibernate:
       ddl-auto: update
+
+server:
+  port: 8888
