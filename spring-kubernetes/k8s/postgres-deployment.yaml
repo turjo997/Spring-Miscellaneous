@@ -10,10 +10,12 @@ metadata:
 spec:
   ports:
     - port: 5432
+      targetPort: 5432
   selector:
     app: postgres
     tier: database
   clusterIP: None
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -29,6 +31,7 @@ spec:
     requests:
       storage: 1Gi
 
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -42,6 +45,7 @@ spec:
   selector:
     matchLabels:
       app: postgres
+      tier: database
   strategy:
     type: Recreate
   template:
