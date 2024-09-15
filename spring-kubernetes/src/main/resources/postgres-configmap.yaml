@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: postgres-configmap
 data:
-  host: "postgres"
-  name: "book-service"
+  host: postgres
+  name: book-service
