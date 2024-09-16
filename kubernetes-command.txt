@@ -77,4 +77,33 @@ mvn clean install -DskipTests
 
 kubectl port-forward postgres-5c97cc44bf-jtgqx 5433:5432
 
+kubectl get secrets
+
+kubectl delete secrets [name]
+
+kubectl get configmaps
+
+kubectl delete configmaps [name]
+
+kubectl get pvc
+
+#delete image by ID
+docker rmi -f [image_id]
+
+
+--------------PSQL
+kubectl exec -it [DB_POD] bash
+
+psql -h postgres -U postgres
+
+#show all DB
+\l 
+
+#Use specefic DB
+\c DB_NAME
+
+#see the tables(relation)
+\dt
+
+
 
