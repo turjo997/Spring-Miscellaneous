@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
         - name: backend-service-k8s
-          image: ullash997/springboot-k8s-crud:1.0
+          image: ullash997/springboot-k8s-demo:1.0
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 8080

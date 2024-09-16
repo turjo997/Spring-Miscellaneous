@@ -1,5 +1,5 @@
 ---
-# Defin a Service to expose database to other service
+# Define a Service to expose database to other service
 apiVersion: v1
 kind: Service
 metadata:
@@ -10,7 +10,6 @@ metadata:
 spec:
   ports:
     - port: 5432
-      targetPort: 5432
   selector:
     app: postgres
     tier: database
@@ -31,7 +30,6 @@ spec:
     requests:
       storage: 1Gi
 
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -45,7 +43,6 @@ spec:
   selector:
     matchLabels:
       app: postgres
-      tier: database
   strategy:
     type: Recreate
   template:
