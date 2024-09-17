@@ -1,5 +1,6 @@
 package com.spring.entity_data_validation.entity;
 
+import com.spring.entity_data_validation.validation.ValidatorEmployeeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -61,6 +62,10 @@ public class Author {
     @Positive(message = "Total books written must be a positive number")
     private int totalBooksWritten;
 
+
+    //custom annotation
+    @ValidatorEmployeeType
+    private String employeeType; //permanent or vendor or contractual
 
 
 }
