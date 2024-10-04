@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/dynamic-pdf
+    username: postgres
+    password: root
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+
+#------------PDF Generation properties---------------------
+pdf:
+  dir: D:/PdfReportRepo/
+  report:
+    file-name: Employee-Report
+    file-name-date-format: dd_MMMM_yyyy
+  local-date-format: "dd MMMM yyyy HH:mm:ss"
+  logo:
+    img-path: D:/img_JTO_logo.jpg
+    img-scale: 50,50
+  currency-symbol: "$"
+  table:
+    no-of-columns: 4
+    column-names: Emp Id , Emp Name , Emp Dept , Emp Sal
+
+
+
+
+
+
+
+
+
