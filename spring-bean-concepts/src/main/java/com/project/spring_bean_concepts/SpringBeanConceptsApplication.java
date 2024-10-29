@@ -3,6 +3,7 @@ package com.project.spring_bean_concepts;
 import com.project.spring_bean_concepts.lifeCycle_annotation.MessageService;
 import com.project.spring_bean_concepts.primary_annotation.EmployeeService;
 import com.project.spring_bean_concepts.qualifier_annotation.PaymentController;
+import com.project.spring_bean_concepts.resource_annotation.app.UserPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -34,11 +35,13 @@ public class SpringBeanConceptsApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		ApplicationContext context =  SpringApplication.run(SpringBeanConceptsApplication.class, args);
 
+		UserPaymentService userPaymentService = context.getBean(UserPaymentService.class);
+
+		userPaymentService.processPayment();
+
 		MessageService messageService  = context.getBean(MessageService.class);
 
 		messageService.sendMessage("Hello, Spring Lifecycle!");
-
-
 
 	}
 
