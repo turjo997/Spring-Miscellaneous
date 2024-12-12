@@ -1,3 +1,16 @@
+#docker run -p [host port]:[container port] [image_name] 
+#here container port means that port which i wrote on application docker file as expose and
+#host port is that port which i want to run in my local. this host host port can be any port . but the container port must be same 
+#as it is defined in dockerfile (If I explicitly mention)
+
+docker run -p 8060:9090 springbootimage:latest 
+
+#  http://localhost:8060/message
+#  http://192.168.1.10:8060/message    /// find this ip using ipconfig which is mentioned under the Wireless LAN adapter Wi-Fi
+#  both will work
+
+
+
 docker run -p 3307:3306 --name mysqlDBContainer -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=BookDB -d mysql
 docker run -p 8090:8080 --name crudimage --net networkmysql -e MYSQL_HOST=mysqlContainer -e MYSQL_PORT:3306 -e MYSQL_DB_NAME=BookDB -e MYSQL_USER=root -e MYSQL_PASSWORD=root crudimage
 docker network create networkmysql
@@ -6,8 +19,6 @@ docker build -t crudimage .
 docker run -p 8060:8080 --name crudimage --net networkmysql -e MYSQL_HOST=mysqlContainer -e MYSQL_PORT:3306 -e MYSQL_DB_NAME=BookDB -e MYSQL_USER=root -e MYSQL_PASSWORD=root ullash997/crud-app
 docker tag crud-app ullash997/crud-app:latest
 docker push ullash997/crud-app:latest
-
-
 
 
 docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_USER=admin -e POSTGRES_DB=farmingHubDB -v C:\postgres_container_data:/var/lib/postgresql/data --name=postgres_con postgres
