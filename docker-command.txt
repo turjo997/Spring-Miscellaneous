@@ -10,6 +10,28 @@ docker run -p 8060:9090 springbootimage:latest
 #  both will work
 
 
+###  FOR preserving data what we need to do is the following ######
+### Suppose there are 2 machines.. machine A and machine B... 
+### let's say machine A is mine and B is another system... now first of all I need to backup the DB in my machine A.
+### Then in machine B, I need to copy the SQL file in the project root dir.
+
+### For machine A
+
+### in one terminal
+
+step -1:  Enter the container ->   docker exec -it postgres_container_db bash
+step- 2:  Inside the container, create a dump file:    pg_dump -U postgres -d dockerPractice -f /var/lib/postgresql/data/backup.sql
+ 
+## in another terminal
+
+step - 3: Copy backup to host ->  docker cp postgres_container_db:/var/lib/postgresql/data/backup.sql ./backup.sql
+
+
+Now in machine B, do the following
+
+step1 : Enter the container ->  docker exec -it postgres_container_db bash
+step2 : Restore the database -> psql -U postgres -d dockerPractice -f /var/lib/postgresql/data/backup.sql   (N.B -> for having this backup.sql I have to put it to the project dir)
+
 
 docker run -p 3307:3306 --name mysqlDBContainer -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=BookDB -d mysql
 docker run -p 8090:8080 --name crudimage --net networkmysql -e MYSQL_HOST=mysqlContainer -e MYSQL_PORT:3306 -e MYSQL_DB_NAME=BookDB -e MYSQL_USER=root -e MYSQL_PASSWORD=root crudimage
