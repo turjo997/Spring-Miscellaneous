@@ -68,3 +68,12 @@ docker run -d --name postgres_container -e POSTGRES_PASSWORD=admin -e POSTGRES_U
 
 docker run -d --name fileapp-container -p 8050:8080 -e SPRING_DATASOURCE_URL=jdbc:postgresql:localhost:5436/invoice-mvc -e SPRING_DATASOURCE_USERNAME=admin -e SPRING_DATASOURCE_PASSWORD=admin fileapp:latest
 
+
+
+### to run compose file
+
+docker-compose up --build
+
+
+
+
