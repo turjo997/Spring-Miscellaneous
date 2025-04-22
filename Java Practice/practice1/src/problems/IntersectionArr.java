@@ -86,8 +86,8 @@ public class IntersectionArr {
 //        }
 
 
-        int[] arr1 = {1, 1, 2, 2, 3, 3, 4, 6, 7};
-        int[] arr2 = {2, 2, 3, 4, 4, 5};
+        int[] arr1 = {1, 1, 2, 2, 3, 3, 4, 6, 7 , 7 , 20 , 20 ,50 , 60 ,70};
+        int[] arr2 = {2, 2, 3, 4, 4, 5, 10 , 10 , 15 , 15, 20 , 20 , 45 , 60 , 60 , 90};
 
         int [] result = findIntersection(arr1 , arr2);
 
