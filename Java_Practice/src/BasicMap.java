@@ -45,11 +45,11 @@ public class BasicMap {
 
         map2.put(1, "Shariful Hasan");
         map2.put(2, "Jehadul Hoque");
-        map2.put(3, "Anamul Haque");
+        map2.put(3, "Aslam Bagh");
         map2.put(4, "Jahangir Alam");
-        map2.put(5, "Sajjad Hossain");
-        map2.put(6, "Partha Debnath");
-        map2.put(7, "Aslam Bagh");
+        map2.put(5, "Partha Debnath");
+        map2.put(6, "Sajjad Hossain");
+        map2.put(7, "Anamul Haque");
         map2.put(null, "Unknown");
         map2.put(8, null);
 
@@ -90,9 +90,9 @@ public class BasicMap {
 //  Implementation      | Key Order       | Null Allowed                        | Notes
 //    HashMap           | No              | key: 1 null, value: multiple null   | Most used, fast O(1) average
 //    LinkedHashMap     | Insertion order | key: 1 null, value: multiple null   | Preserves insertion order
-//    TreeMap           | Sorted by key   | null key: ❌, value: multiple null  | Keys sorted naturally or via comparator
-//    Hashtable         | No              | ❌                                  | Legacy, synchronized (thread-safe)
-//    ConcurrentHashMap | No              | ❌                                  | Thread-safe, high-performance
+//    TreeMap           | Sorted by key   | null key: , value: multiple null  | Keys sorted naturally or via comparator
+//    Hashtable         | No              | no                                  | Legacy, synchronized (thread-safe)
+//    ConcurrentHashMap | No              | no                                  | Thread-safe, high-performance
 
     }
 }
