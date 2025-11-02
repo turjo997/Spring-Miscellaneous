@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Employee</title>
+</head>
+<body>
+<h1>Add Employee (Tenant: <span th:text="${tenant}"></span>)</h1>
+
+<form th:action="@{/employee/add(tenant=${tenant})}" method="post" th:object="${employee}">
+    Name: <input type="text" th:field="*{name}" /> <br/>
+    <button type="submit">Save</button>
+</form>
+
+<a th:href="@{/employee(tenant=${tenant})}">Back to List</a>
+</body>
+</html>
