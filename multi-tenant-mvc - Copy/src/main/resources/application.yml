@@ -1,0 +1,13 @@
+#defaultTenant: "tenant_1"
+#
+#tenants:
+#  tenant_1:
+#    url: jdbc:postgresql://localhost:5432/tenant1
+#    username: postgres
+#    password: root
+#    driver-class-name: org.postgresql.Driver
+#  tenant_2:
+#    url: jdbc:postgresql://localhost:5432/tenant2
+#    username: postgres
+#    password: root
+#    driver-class-name: org.postgresql.Driver
