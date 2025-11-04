@@ -2,6 +2,7 @@ package com.iwl.multi_tenant_mvc;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -17,27 +18,24 @@ public class TenantFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
 
-        //this one is for rest api
+        // First, try to get tenant from session
+        HttpSession session = req.getSession(false);
+        String tenantName = null;
+        if (session != null) {
+            tenantName = (String) session.getAttribute("TENANT");
+        }
 
-//        String tenantName = req.getHeader("X-TenantID");
-//        TenantContext.setCurrentTenant(tenantName);
-//
-//        try {
-//            chain.doFilter(request, response);
-//        } finally {
-////            TenantContext.setCurrentTenant("");
-//            TenantContext.clear();
-//        }
-
-
-        //this one is for mvc pattern
-
-        String tenantName = req.getParameter("tenant"); // support query param now
+        // Fallback to query parameter or header if not in session (for login page)
+        if (tenantName == null) {
+            tenantName = req.getParameter("tenant");
+        }
         if (tenantName == null) {
             tenantName = req.getHeader("X-TenantID");
         }
 
+        // Set tenant context for this thread
         TenantContext.setCurrentTenant(tenantName);
+
         try {
             chain.doFilter(request, response);
         } finally {

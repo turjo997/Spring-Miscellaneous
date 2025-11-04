@@ -29,6 +29,9 @@
 
 <div th:if="${error}" th:text="${error}" style="color:red;"></div>
 <div th:if="${message}" th:text="${message}" style="color:green;"></div>
+<div th:if="${param.logout}" style="color:green;">
+    You have been logged out successfully.
+</div>
 
 </body>
 </html>

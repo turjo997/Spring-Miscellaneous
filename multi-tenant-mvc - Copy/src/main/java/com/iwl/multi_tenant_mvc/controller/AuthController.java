@@ -3,6 +3,8 @@ package com.iwl.multi_tenant_mvc.controller;
 import com.iwl.multi_tenant_mvc.TenantContext;
 import com.iwl.multi_tenant_mvc.domain.User;
 import com.iwl.multi_tenant_mvc.repo.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -26,20 +28,18 @@ public class AuthController {
 
     @GetMapping("/login")
     public String loginForm(Model model) {
-//        List<String> tenants = masterJdbcTemplate.queryForList("SELECT tenant_id FROM tenant_master WHERE active = TRUE", String.class);
         model.addAttribute("user", new User());
         model.addAttribute("tenants", tenants);
         return "auth/login";
     }
 
-
     @PostMapping("/login")
-    public String login(@ModelAttribute User user, @RequestParam("tenant") String tenant, Model model) {
-//        List<String> tenants = masterJdbcTemplate.queryForList("SELECT tenant_id FROM tenant_master WHERE active = TRUE", String.class);
+    public String login(@ModelAttribute User user, @RequestParam("tenant") String tenant, HttpServletRequest request, Model model) {
         TenantContext.setCurrentTenant(tenant);
         Optional<User> userOpt = userRepository.findByUsername(user.getUsername());
         if (userOpt.isPresent() && userOpt.get().getPassword().equals(user.getPassword())) {
-            model.addAttribute("tenant", tenant);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("TENANT", tenant);
             model.addAttribute("message", "Login successful for tenant: " + TenantContext.getCurrentTenant());
             return "auth/success";
         } else {
@@ -48,5 +48,15 @@ public class AuthController {
             return "auth/login";
         }
     }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // clear tenant + user data
+        }
+        TenantContext.clear();
+        return "redirect:/auth/login?logout"; // redirect to login page
+    }
+
 }
 

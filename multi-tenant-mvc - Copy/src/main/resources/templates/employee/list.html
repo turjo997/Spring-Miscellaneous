@@ -13,7 +13,7 @@
         <td th:text="${emp.name}"></td>
     </tr>
 </table>
-
+<a th:href="@{/auth/logout}" style="margin-left:20px;">Logout</a>
 <a th:href="@{/employee/add(tenant=${tenant})}">Add Employee</a>
 </body>
 </html>
