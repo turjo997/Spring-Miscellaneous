@@ -5,9 +5,13 @@
 </head>
 <body>
 <h1 th:text="${message}"></h1>
-<!--<a href="/employee">Go to Employees</a>-->
+
+<!-- Tenant ID preserved -->
+<!--<a th:href="@{/employee}">Go to Employees</a>-->
 <a th:href="@{/employee(tenant=${tenant})}">Go to Employees</a>
-<a th:href="@{/auth/logout}">Logout</a>
+<!-- Proper logout link -->
+<a th:href="@{/auth/logout/{tenantId}(tenantId=${tenant})}">Logout</a>
+<!--<a th:href="@{/auth/logout}">Logout</a>-->
 
 </body>
 </html>

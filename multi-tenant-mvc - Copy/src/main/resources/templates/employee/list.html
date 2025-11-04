@@ -4,7 +4,7 @@
     <title>Employee List</title>
 </head>
 <body>
-<h1>Employees (Tenant: <span th:text="${tenant}"></span>)</h1>
+<!--<h1>Employees (Tenant: <span th:text="${tenant}"></span>)</h1>-->
 
 <table border="1">
     <tr><th>ID</th><th>Name</th></tr>
@@ -13,7 +13,12 @@
         <td th:text="${emp.name}"></td>
     </tr>
 </table>
-<a th:href="@{/auth/logout}" style="margin-left:20px;">Logout</a>
-<a th:href="@{/employee/add(tenant=${tenant})}">Add Employee</a>
+
+<!-- Logout link -->
+<a th:href="@{/auth/logout/{tenantId}(tenantId=${tenant})}">Logout</a>
+<!--<a th:href="@{/auth/logout}">Logout</a>-->
+<a th:href="@{/employee/add}">Add Employee</a>
+
+
 </body>
 </html>

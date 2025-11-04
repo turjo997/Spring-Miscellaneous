@@ -8,12 +8,14 @@ public class TenantContext {
 
     public static void setCurrentTenant(String tenant){
         currentTenant.set(tenant);
+        System.out.println("[TenantContext] Set tenant: " + tenant);
     }
 
     public static String getCurrentTenant(){
         return currentTenant.get();
     }
     public static void clear(){
+        System.out.println("[TenantContext] Cleared tenant context");
         currentTenant.remove();
     }
 

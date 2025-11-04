@@ -21,9 +21,10 @@ public class EmployeeController {
     private EmployeeRepository employeeRepository;
 
     @GetMapping
-    public String listEmployees(Model model) {
+    public String listEmployees(@RequestParam String tenant, Model model) {
         List<Employee> employees = employeeRepository.findAll();
         model.addAttribute("employees", employees);
+        model.addAttribute("tenant", tenant);
         return "employee/list"; // maps to src/main/resources/templates/employee/list.html
     }
 

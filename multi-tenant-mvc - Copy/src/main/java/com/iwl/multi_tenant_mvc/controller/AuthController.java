@@ -26,37 +26,55 @@ public class AuthController {
     @Autowired
     private List<String> tenants;
 
-    @GetMapping("/login")
-    public String loginForm(Model model) {
+    @GetMapping("/login/{tenant}")
+    public String loginForm(@PathVariable String tenant, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
+        session.setAttribute("TENANT", tenant);
         model.addAttribute("user", new User());
-        model.addAttribute("tenants", tenants);
+//        model.addAttribute("tenants", tenants);
+        model.addAttribute("tenant", tenant);
         return "auth/login";
+
     }
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute User user, @RequestParam("tenant") String tenant, HttpServletRequest request, Model model) {
+    @PostMapping("/login/{tenant}")
+    public String login(@ModelAttribute User user, @PathVariable ("tenant") String tenant, HttpServletRequest request, Model model) {
         TenantContext.setCurrentTenant(tenant);
         Optional<User> userOpt = userRepository.findByUsername(user.getUsername());
         if (userOpt.isPresent() && userOpt.get().getPassword().equals(user.getPassword())) {
             HttpSession session = request.getSession(true);
             session.setAttribute("TENANT", tenant);
+            model.addAttribute("tenant", tenant);
             model.addAttribute("message", "Login successful for tenant: " + TenantContext.getCurrentTenant());
             return "auth/success";
         } else {
             model.addAttribute("error", "Invalid credentials");
-            model.addAttribute("tenants", tenants);
+            model.addAttribute("tenant", tenant);
+//            model.addAttribute("tenants", tenants);
             return "auth/login";
         }
     }
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
+//    @GetMapping("/logout")
+//    public String logout(HttpServletRequest request) {
+//        HttpSession session = request.getSession(false);
+//        if (session != null) {
+//            session.invalidate(); // clear tenant + user data
+//        }
+//        TenantContext.clear();
+//        return "redirect:/auth/login?logout"; // redirect to login page
+//    }
+
+    @GetMapping("/logout/{tenantId}")
+    public String logout(@PathVariable String tenantId, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
-            session.invalidate(); // clear tenant + user data
+            session.invalidate(); // clear user + tenant data from session
         }
-        TenantContext.clear();
-        return "redirect:/auth/login?logout"; // redirect to login page
+        TenantContext.clear(); // clear thread-local tenant
+
+        return "redirect:/auth/login/" + tenantId + "?logout";
     }
+
 
 }
 

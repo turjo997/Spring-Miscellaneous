@@ -4,19 +4,9 @@
     <title>Login</title>
 </head>
 <body>
-<h1>Login</h1>
+<h1 th:text="'Login for ' + ${tenant}"></h1>
 
-<form th:action="@{/auth/login}" th:object="${user}" method="post">
-
-    <label>Tenant:</label>
-    <select name="tenant" required>
-        <option value="">-- Select Tenant --</option>
-        <option th:each="t : ${tenants}"
-                th:value="${t}"
-                th:text="${t}">
-        </option>
-    </select>
-    <br/><br/>
+<form th:action="@{/auth/login/{tenant}(tenant=${tenant})}" th:object="${user}" method="post">
 
     <label>Username:</label>
     <input type="text" th:field="*{username}" required/> <br/><br/>
@@ -32,6 +22,6 @@
 <div th:if="${param.logout}" style="color:green;">
     You have been logged out successfully.
 </div>
-
 </body>
 </html>
+
