@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+/* Center the table nicely */
+table {
+    width: 70%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Header styling */
+thead th {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #000;
+    font-size: 16px;
+}
+
+/* Body cells */
+td {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Align numbers to the right */
+td:nth-child(2),
+td:nth-child(3) {
+    text-align: right;
+    width: 120px;
+}
+
+/* Total row bold */
+tfoot td {
+    font-weight: bold;
+    border-top: 2px solid #000;
+    padding-top: 12px;
+}

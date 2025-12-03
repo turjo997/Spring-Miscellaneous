@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Trial Balance</title>
+    <link rel="stylesheet" th:href="@{/css/report.css}">
+</head>
+
+<body>
+
+<h2>Trial Balance</h2>
+
+<form th:object="${report}" th:action="@{/reports/trial-balance}" method="post">
+    Start Date: <input type="date" th:field="*{startDate}">
+    End Date: <input type="date" th:field="*{endDate}">
+    <button type="submit">Generate</button>
+</form>
+
+
+<!--<table border="1">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Account</th>-->
+<!--        <th>Debit</th>-->
+<!--        <th>Credit</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+
+<!--    <tbody>-->
+<!--    <tr th:each="row : ${rows}">-->
+<!--        <td th:text="${row.accountName}"></td>-->
+<!--        <td th:text="${row.debit}"></td>-->
+<!--        <td th:text="${row.credit}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+
+
+<div th:if="${response != null}">
+    <h2 th:text="${response.title}">Trial Balance</h2>
+
+    <table>
+        <thead>
+        <tr><th>Account</th><th>Debit</th><th>Credit</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="row : ${response.rows}">
+            <td th:text="${row.accountName}">Account</td>
+            <td th:text="${row.debit}">0.00</td>
+            <td th:text="${row.credit}">0.00</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td>Total</td>
+            <td th:text="${response.totalDebit}">0.00</td>
+            <td th:text="${response.totalCredit}">0.00</td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+</body>
+</html>
